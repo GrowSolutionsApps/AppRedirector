@@ -36,50 +36,50 @@ public class LiveAppActivity extends AppCompatActivity {
         Log.w("msg", "isAppLive isImmediate  " + isImmediate);
         Log.w("msg", "isAppLive app_redirect_package  " + app_redirect_package);
 
-//        if (!isAppLiveOrNot) {
-        if (isImmediate) {
-            ImmediateDialog gameDialog = new ImmediateDialog(activity);
-            gameDialog.setImagePath(R.drawable.icon_immediate);
-            gameDialog.setDrawblePath(shape_g);
-            gameDialog.setApplyListener(new ImmediateDialog.OnApplyListener() {
-                @Override
-                public void onClick(ImmediateDialog dialog, int randomNumber) {
-                    context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    System.exit(1);
-                    dialog.dismiss();
-                    Log.w("msg", "isAppLive gameDialog click  ");
-                }
-            });
-            gameDialog.show();
-            gameDialog.setCancelable(false);
-            gameDialog.setCanceledOnTouchOutside(false);
+        if (!is_app_live) {
+            if (isImmediate) {
+                ImmediateDialog gameDialog = new ImmediateDialog(activity);
+                gameDialog.setImagePath(R.drawable.icon_immediate);
+                gameDialog.setDrawblePath(shape_g);
+                gameDialog.setApplyListener(new ImmediateDialog.OnApplyListener() {
+                    @Override
+                    public void onClick(ImmediateDialog dialog, int randomNumber) {
+                        context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        System.exit(1);
+                        dialog.dismiss();
+                        Log.w("msg", "isAppLive gameDialog click  ");
+                    }
+                });
+                gameDialog.show();
+                gameDialog.setCancelable(false);
+                gameDialog.setCanceledOnTouchOutside(false);
 
-        } else {
-            FlexibleDialog gameDialog = new FlexibleDialog(activity);
-            gameDialog.setImagePath(R.drawable.icon_immediate);
-            gameDialog.setDrawblePath(shape_g);
-            gameDialog.setnotNoewDrawblePath(shape_g_border);
-            gameDialog.setApplyListener(new FlexibleDialog.OnApplyListener() {
-                @Override
-                public void onClick(FlexibleDialog dialog, int randomNumber) {
-                    context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    dialog.dismiss();
-                    Log.w("msg", "isAppLive gameDialog click  ");
+            } else {
+                FlexibleDialog gameDialog = new FlexibleDialog(activity);
+                gameDialog.setImagePath(R.drawable.icon_immediate);
+                gameDialog.setDrawblePath(shape_g);
+                gameDialog.setnotNoewDrawblePath(shape_g_border);
+                gameDialog.setApplyListener(new FlexibleDialog.OnApplyListener() {
+                    @Override
+                    public void onClick(FlexibleDialog dialog, int randomNumber) {
+                        context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        dialog.dismiss();
+                        Log.w("msg", "isAppLive gameDialog click  ");
 
-                }
-            });
-            gameDialog.setnotNowListener(new FlexibleDialog.OnNotnowListener() {
-                @Override
-                public void onClick(FlexibleDialog dialog, int randomNumber) {
-                    dialog.dismiss();
-                }
-            });
+                    }
+                });
+                gameDialog.setnotNowListener(new FlexibleDialog.OnNotnowListener() {
+                    @Override
+                    public void onClick(FlexibleDialog dialog, int randomNumber) {
+                        dialog.dismiss();
+                    }
+                });
 
-            gameDialog.show();
-            gameDialog.setCancelable(false);
-            gameDialog.setCanceledOnTouchOutside(false);
+                gameDialog.show();
+                gameDialog.setCancelable(false);
+                gameDialog.setCanceledOnTouchOutside(false);
+            }
         }
-//        }
     }
 
 
