@@ -31,54 +31,71 @@ public class LiveAppActivity extends AppCompatActivity {
     public void checkAppisLiveOrNot(Context context, Activity activity, Boolean is_app_live, Boolean isImmediate, String app_redirect_package, Drawable shape_g, Drawable shape_g_border) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Log.w("msg", "isAppLive checkAppisLiveOrNot  ");
-        Log.w("msg", "isAppLive is_app_live  " + is_app_live);
-        Log.w("msg", "isAppLive isImmediate  " + isImmediate);
-        Log.w("msg", "isAppLive app_redirect_package  " + app_redirect_package);
 
-        if (!is_app_live) {
-            if (isImmediate) {
-                ImmediateDialog gameDialog = new ImmediateDialog(activity);
-                gameDialog.setImagePath(R.drawable.icon_immediate);
-                gameDialog.setDrawblePath(shape_g);
-                gameDialog.setApplyListener(new ImmediateDialog.OnApplyListener() {
-                    @Override
-                    public void onClick(ImmediateDialog dialog, int randomNumber) {
-                        context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                        System.exit(1);
-                        dialog.dismiss();
-                        Log.w("msg", "isAppLive gameDialog click  ");
-                    }
-                });
-                gameDialog.show();
-                gameDialog.setCancelable(false);
-                gameDialog.setCanceledOnTouchOutside(false);
 
-            } else {
-                FlexibleDialog gameDialog = new FlexibleDialog(activity);
-                gameDialog.setImagePath(R.drawable.icon_immediate);
-                gameDialog.setDrawblePath(shape_g);
-                gameDialog.setnotNoewDrawblePath(shape_g_border);
-                gameDialog.setApplyListener(new FlexibleDialog.OnApplyListener() {
-                    @Override
-                    public void onClick(FlexibleDialog dialog, int randomNumber) {
-                        context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                        dialog.dismiss();
-                        Log.w("msg", "isAppLive gameDialog click  ");
+        try {
+            Log.w("msg", "isAppLive checkAppisLiveOrNot  ");
+            Log.w("msg", "isAppLive is_app_live  " + is_app_live);
+            Log.w("msg", "isAppLive isImmediate  " + isImmediate);
+            Log.w("msg", "isAppLive app_redirect_package  " + app_redirect_package);
+            if (!is_app_live) {
+                if (isImmediate) {
+                    ImmediateDialog gameDialog = new ImmediateDialog(activity);
+                    gameDialog.setImagePath(R.drawable.icon_immediate);
+                    gameDialog.setDrawblePath(shape_g);
+                    gameDialog.setApplyListener(new ImmediateDialog.OnApplyListener() {
+                        @Override
+                        public void onClick(ImmediateDialog dialog, int randomNumber) {
+                            try {
+                                context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                System.exit(1);
+                                dialog.dismiss();
+                                Log.w("msg", "isAppLive gameDialog click  ");
+                            } catch (Exception e) {
 
-                    }
-                });
-                gameDialog.setnotNowListener(new FlexibleDialog.OnNotnowListener() {
-                    @Override
-                    public void onClick(FlexibleDialog dialog, int randomNumber) {
-                        dialog.dismiss();
-                    }
-                });
+                            }
+                        }
+                    });
+                    gameDialog.show();
+                    gameDialog.setCancelable(false);
+                    gameDialog.setCanceledOnTouchOutside(false);
 
-                gameDialog.show();
-                gameDialog.setCancelable(false);
-                gameDialog.setCanceledOnTouchOutside(false);
+                } else {
+                    FlexibleDialog gameDialog = new FlexibleDialog(activity);
+                    gameDialog.setImagePath(R.drawable.icon_immediate);
+                    gameDialog.setDrawblePath(shape_g);
+                    gameDialog.setnotNoewDrawblePath(shape_g_border);
+                    gameDialog.setApplyListener(new FlexibleDialog.OnApplyListener() {
+                        @Override
+                        public void onClick(FlexibleDialog dialog, int randomNumber) {
+                            try {
+                                context.startActivity(new Intent("android.intent.action.VIEW", Uri.parse(app_redirect_package)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                dialog.dismiss();
+                                Log.w("msg", "isAppLive gameDialog click  ");
+                            } catch (Exception e) {
+
+                            }
+
+                        }
+                    });
+                    gameDialog.setnotNowListener(new FlexibleDialog.OnNotnowListener() {
+                        @Override
+                        public void onClick(FlexibleDialog dialog, int randomNumber) {
+                            try {
+                                dialog.dismiss();
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    });
+
+                    gameDialog.show();
+                    gameDialog.setCancelable(false);
+                    gameDialog.setCanceledOnTouchOutside(false);
+                }
             }
+        } catch (Exception e) {
+
         }
     }
 
